@@ -1,0 +1,39 @@
+{
+  "name": "backend-node-ts",
+  "version": "1.0.0",
+  "description": "Challenge - Backend Node TS",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "build": "tsc",
+    "dev": "nodemon server/app.ts",
+    "start": "node dist/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/equipindustry/challenge-backend-node-ts.git"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "ts",
+    "graphql"
+  ],
+  "author": "equip",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server-express": "^3.13.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "graphql": "^16.8.1",
+    "mongoose": "^8.0.1",
+    "typescript": "^5.3.2"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "nodemon": "^3.0.1",
+    "ts-node": "^10.9.1"
+  }
+}
