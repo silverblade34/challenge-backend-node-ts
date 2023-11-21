@@ -2,7 +2,7 @@ import { gql } from "apollo-server-express";
 
 export const schema = gql`
   extend type Query {
-    testProdQ: Boolean
+    testProdQ: Int
   }
 
   extend type Mutation {

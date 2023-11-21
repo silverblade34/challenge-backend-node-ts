@@ -1,5 +1,8 @@
+import Accounts from "../../models/accounts";
+
 export const queries = {
   testAccQ: async (_: any) => {
-    return true;
+    const accounts = await Accounts.find({});
+    return accounts.length;
   },
 };
