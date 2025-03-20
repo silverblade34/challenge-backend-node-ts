@@ -3,9 +3,9 @@
 # Reto - Backend ExpressTS/GraphQL/MongoDB
 
 ```
-Fecha inicio: 13/12/2023
-Fecha fin: 20/12/2023
-Fecha respuesta: 28/12/2023
+Fecha inicio: 25/03/2025
+Fecha fin: 27/03/2025
+Fecha respuesta: 31/03/2025
 ```
 
 #### Conocimientos Requeridos:
