@@ -1,70 +1,112 @@
-<img src="./logo.png" alt="Project Logo or Image" width="120" height="100" style="margin-bottom: -30px">
+# Reto Backend Semi-Senior - GraphQL + MongoDB
 
-# Reto - Backend ExpressTS/GraphQL/MongoDB
+## 🚀 Objetivo
 
-```
-Fecha inicio: 23/04/2025
-Fecha fin: 25/04/2025
-Fecha respuesta: 29/04/2025
-```
+Construir una API GraphQL que gestione cuentas y productos, permitiendo:
 
-#### Conocimientos Requeridos:
+- Crear y consultar cuentas y productos.
+- Asociar productos a cuentas.
+- Simular una compra (actualizar stock).
+- (BONUS) Integrarse con Odoo (XML-RPC).
 
-- [x] MongoDB
-- [x] Typescript
-- [x] ExpressJS
-- [x] GraphQL
+## 👁‍🗨️ Stack esperado
 
-#### Descripción:
+- Node.js + TypeScript
+- Express + Apollo Server (GraphQL)
+- MongoDB (conexión a dos bases)
+- Buenas prácticas de código (tipado, validaciones)
+- Uso de eslint/prettier
+- Manejo de logger
+- (Opcional) XML-RPC
 
-Los usuarios cliente podrán cargar productos vinculados a sus cuentas. Luego, podrán listar y/o buscar productos donde podrán visualizar el detalle de la cuenta asociada a cada producto.
+## 🗂️ Estructura del proyecto base
 
-Este proyecto está conectado a 2 bases de datos **eiAccounts** y **eiInventories**. La lista de productos está relacionada a la cuenta con la que se asoció al momento de la carga inicial.
-
-#### Tareas:
-
-##### A. Cuentas:
-
-- [ ] Crear una mutación para agregar una cuenta cliente
-- [ ] Crear una query para listar las cuentas enviando parámetros de **paginación** y filtrado de búsqueda (nombre/email) usando el método **aggregate** de **mongoose**
-
-##### B. Productos:
-
-- [ ] Crear una mutación para agregar un array de productos (debe asociarse a una cuenta cliente)
-- [ ] Crear una query listar los productos enviando parámetros de **paginación** y filtrado de búsqueda (nombre/sku) usando el método **aggregate** de **mongoose**
-- [ ] Sobre la query anterior, se debe agregar al **schema** del Producto, el campo Account para obtener los detalles de la cuenta asociada
-
-> Para las mutaciones agregar archivos mockups en el proyecto que sirva para la creación de cuentas y/o productos
-
-> Opcional: Se considerará el uso de enums, types en root, validaciones en queries y mutaciones y creaciones de carpetas utils o helpers
-
-#### Mejoras:
-
-```
-Según criterio del desarrollador
-```
-
-- [ ] Añadir eslint
-- [ ] Añadir prettier
-- [ ] Añadir test unitarios
-- [ ] Añadir un logger
-
-#### Extras:
-
-- [x] ¿Cómo crear un usuario en mongodb shell?
-
-```
-~ db.createUser({ user: 'equip', pwd: 'BackendChallenge', roles: ['readWrite', 'dbAdmin'] })
-```
-
-- [x] Iniciar servicio mongdb community
-
-```
-brew services start mongodb-community@7.0
+```bash
+server/
+├── config/
+│   └── app.ts              # Variables de entorno centralizadas
+├── db/
+│   └── mongodb.ts          # Conexión multi-base
+├── graphql/
+│   ├── accounts/
+│   │   ├── index.ts
+│   │   ├── queries.ts
+│   │   ├── mutations.ts
+│   │   └── schema.ts
+│   ├── products/
+│   │   ├── index.ts
+│   │   ├── queries.ts
+│   │   ├── mutations.ts
+│   │   └── schema.ts
+│   └── root/
+│       └── index.ts        # TypeDefs y resolvers principales
+│   └── index.ts            # Exporta los typeDefs y resolvers combinados
+├── interfaces/
+│   ├── account.ts          # IAccount
+│   └── product.ts          # IProduct
+├── models/
+│   ├── accounts.ts
+│   └── products.ts
+├── services/
+│   ├── odoo.ts
+├── app.ts                  # Setup del servidor Express + Apollo
+├── .env
+├── .env.test
+├── .gitignore
+├── logo.png
+├── package.json
+├── tsconfig.json
+└── README.md
 ```
 
-- [x] Detener servicio mongdb community
+## ✍️ Requisitos del reto
 
-```
-brew services stop mongodb-community@7.0
-```
+### 1. Cuentas (DB: `eiAccounts`, colección `accounts`)
+
+- Crear cuenta: `name`, `email`
+- Consultar cuenta por ID
+- Listar cuentas con filtro por nombre (paginado)
+
+### 2. Productos (DB: `eiBusiness`, colección `products`)
+
+- Crear producto: `name`, `sku`, `stock`
+- Consultar producto por ID
+- Listar productos por ID de cuenta (relación manual)
+
+### 3. Simulación de compra
+
+- Mutation: `purchaseProduct(accountId: ID!, productId: ID!, quantity: Int!)`
+  - Valida existencia de cuenta
+  - Valida existencia de producto
+  - Valida stock suficiente
+  - Resta cantidad del stock y retorna un mensaje de éxito o error
+
+### 4. BONUS (Odoo)
+
+- Usar `xmlrpc` para consultar información de cliente en Odoo (correo o nombre)
+- Crear una función para crear o editar clientes en Odoo (por ejemplo, `res.partner.create` o `res.partner.write` usando XML-RPC).
+- **No es necesario contar con un entorno Odoo funcional.** Basta con que documentes en código cómo se haría la integración (estructura del método, parámetros esperados, y ejemplo de llamada).
+- Si lo deseas, puedes usar mocks o comentarios explicativos para demostrar tu comprensión.
+
+## 📑 Criterios de evaluación
+
+| Criterio                      | Puntos |
+| ----------------------------- | ------ |
+| Correcta implementación       | 30     |
+| Organización del proyecto     | 20     |
+| Buen uso de GraphQL y Typings | 20     |
+| Validaciones y errores        | 10     |
+| Documentación y claridad      | 10     |
+| Bonus Odoo (opcional)         | 10     |
+
+## ✅ Entregables
+
+- Repositorio GitHub o archivo ZIP
+- README con instrucciones para levantar el proyecto
+- Documentación de operaciones (puede ser en GraphQL Playground)
+
+---
+
+📢 **Importante**: Este reto está diseñado para ser resuelto en 1 o 2 días como máximo. No se espera una arquitectura enterprise, pero sí buenas prácticas y claridad.
+
+🎓 Empresa: [Equip](https://www.equipconstruye.com) - B2B de materiales de construcción en Lima, Perú.
