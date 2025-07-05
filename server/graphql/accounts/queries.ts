@@ -1,5 +1,3 @@
-// server/graphql/accounts/queries.ts
-
 import { ObjectId } from 'mongodb';
 import Accounts from '../../models/accounts';
 import { IAccountsFilter } from '../../interfaces/account';

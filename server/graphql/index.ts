@@ -1,4 +1,3 @@
-// server/graphql/index.ts
 import { ApolloServer } from "apollo-server-express";
 import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
 import { makeExecutableSchema } from "@graphql-tools/schema";

@@ -1,4 +1,3 @@
-// server/graphql/accounts/products.ts
 import { gql } from 'apollo-server-express';
 
 export const productsTypeDefs = gql`

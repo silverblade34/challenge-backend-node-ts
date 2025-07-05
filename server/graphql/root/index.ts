@@ -1,4 +1,3 @@
-// server/graphql/root/index.ts
 import { gql } from "apollo-server-express";
 import {
   accountsTypeDefs as accountsSchema,
