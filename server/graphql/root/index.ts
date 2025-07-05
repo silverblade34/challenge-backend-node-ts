@@ -1,22 +1,20 @@
+// server/graphql/root/index.ts
 import { gql } from "apollo-server-express";
-
 import {
-  schema as accountsSchema,
-  queries as accountsQueries,
-  mutations as accountsMutations,
+  accountsTypeDefs as accountsSchema,
 } from "../accounts";
-
 import {
-  schema as productsSchema,
-  queries as productsQueries,
-  mutations as productsMutations,
+  productsTypeDefs as productsSchema,
 } from "../products";
+import { accountsQueries } from "../accounts/queries";
+import { accountsMutations } from "../accounts/mutations";
+import { productsQueries } from "../products/queries";
+import { productsMutations } from "../products/mutations";
 
 const rootTypeDefs = gql`
   type Query {
     _: String
   }
-
   type Mutation {
     _: String
   }
